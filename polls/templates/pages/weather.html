@@ -1,0 +1,26 @@
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+       <div class="d-flex justify-content-between">
+        <p class="card-title">Weather</p>
+        <a href="#" class="text-info">View all</a>
+       </div>
+        <form action="" method="POST">
+            {% csrf_token %}
+
+          {{ form.name }}
+          <button type="submit" class="btn btn-primary mt-2">Search</button>
+        </form>
+        <div class="row">
+          {% for city_weather in weather_data %}
+          <div class="col-md-3">
+            <img src="http://openweathermap.org/img/w/{{city_weather.icon}}.png" alt="Image">
+            <h4>{{ city_weather.city }}</h4>
+            <h4>{{ city_weather.temperature }}</h4>
+            <h4>{{ city_weather.description }}</h4>
+          </div>
+          {% endfor %}
+        </div>  
+      </div>
+    </div>
+  </div>

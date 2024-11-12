@@ -1,0 +1,53 @@
+{% extends 'layout/master.html' %}
+{% load static %}
+<title>{% block title %}Create Page{% endblock title %}</title>
+
+{% block content %}
+  <div class="container-scroller">
+    <!-- partial:../../partials/_navbar.html -->
+    {% include "layout/navbar.html"%}
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:../../partials/_settings-panel.html -->
+       {% include 'layout/notification.html' %}
+      <!-- partial -->
+      <!-- partial:../../partials/_sidebar.html -->
+      {% include 'layout/sidebar.html' %}
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title text-center">အာရက္ခတပ်တော် စစ်သည်/မယ် များကို အသစ်ထည့်ပါ </h4>
+                    <p class="card-description">
+                      အာရက္ခတပ်တော်သည် အာရက္ခပြည်သူများ၏ အားကိုးရာဖြစ်သည်၊၊
+                    </p>
+                    
+                  </div>
+                  <!-- card body -->
+                </div>
+                <!-- card -->
+              </div>
+              <!-- col-lg-12 -->
+            </div>
+            <a href="{% url 'tablepage' %}" class="btn btn-primary btn-md">Back</a>
+          <!-- row end -->
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+ {% endblock content %}

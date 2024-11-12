@@ -1,0 +1,18 @@
+/* zaw css */
+
+/* table show all */
+.list{
+    padding-left: 450px;
+    color: rgb(0, 162, 255);
+  }
+.list-img{
+    height: 40px;object-fit:cover;
+}
+
+/* table per_views image */
+.peviewimg{
+    height: 100px;
+    width: 100px;
+}
+
+

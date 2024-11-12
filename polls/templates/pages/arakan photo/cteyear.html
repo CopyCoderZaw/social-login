@@ -1,0 +1,136 @@
+{% extends 'layout/master.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}
+{% if page == 'create' %}
+Create page
+{% else %}
+Update page
+{% endif %}
+{% endblock title %}
+
+{% block content %}
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    {% include 'layout/navbar.html' %}
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+    {% include 'layout/notification.html' %}
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      {% include 'layout/sidebar.html' %}
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            
+            <div class="col-lg-8 grid-margin stretch-card">
+                <div class="card">
+                  <div class="card-body">
+                    <!-- for messages -->
+                    {% for message in messages %}
+                      <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Hello, </strong> {{message}}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
+                    {% endfor %}
+                      <!-- for messages end -->
+
+                    <h4 class="card-title">Add Years</h4>
+                    <div class="table-responsive">
+                      <table class="table-bordered table text-center">
+                        <thead>
+                          <tr>
+                            <th>စိုင်</th>
+                            <th>နှစ်</th>
+                            <th >ပြုပြင်ချက်</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for year in years %}
+                          <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{year.name}} <span>year</span></td>
+                            <td>
+                              
+                              <a href="{% url 'edityearpage' year.id %}" class="btn btn-success btn-sm">Edit</a>
+                              <a href="{% url 'deleteyearpage' year.id %}" class="btn btn-danger btn-sm">Delete</a>
+                            </td>
+                          </tr>
+                          {% endfor %}
+                          
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% if page == 'create' %}
+              <div class="col-lg-4 grid-margin">
+                <div class="card">
+                  <div class="card-body">
+                    <h4 class="card-title">Add Years</h4>
+
+                    <form class="forms-sample" method="POST">
+                      {% csrf_token %}
+                        
+                        <div class="form-group">
+                          {{form.name|as_crispy_field}}
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-md">Create</button>
+                            <a href="{% url 'armyphotopage' %}" class="btn btn-info btn-md">Back</a>
+                        </div>
+                        
+                      </form>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+            
+            {% if page == 'edit' %}
+            <div class="col-lg-4 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Edit Years</h4>
+                  <form class="forms-sample" method="POST">
+                    {% csrf_token %}
+                      
+                      <div class="form-group">
+                        <input type="text" value="{{year.name}}" name="name" class="form-control">
+                      </div>
+                      <div class="form-group">
+                          <button class="btn btn-primary btn-md">Edit</button>
+                          <a href="{% url 'crtyearpage' %}" class="btn btn-info btn-md">Back</a>
+                      </div>
+                      
+                    </form>
+                </div>
+              </div>
+            </div>
+            {% endif %}
+            </div>
+
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
+          </div>
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Distributed by <a href="https://www.themewagon.com/" target="_blank">Themewagon</a></span> 
+          </div>
+        </footer> 
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>   
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+
+{% endblock content %}
+

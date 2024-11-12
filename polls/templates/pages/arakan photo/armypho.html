@@ -1,0 +1,71 @@
+{% extends 'layout/master.html' %}
+{% load static %}
+{% block title %}Army Photo Page{% endblock title %}
+
+{% block content %}
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    {% include 'layout/navbar.html' %}
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+    {% include 'layout/notification.html' %}
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      {% include 'layout/sidebar.html' %}
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <h4 class="text-center text-danger">အာရက္ခတပ်တော်၏ တစ်နှစ်တာ ဓါတ်ပုံများ</h4>
+          <a href="{% url 'armyphotopage' %}" class="btn btn-primary btn-md">All</a>
+          {% for year in years %}
+          <a href="{% url 'armyphotopage' %}?year={{year.name}}" class="btn btn-primary btn-md">{{year.name}}</a>
+            {% endfor %}
+          <a href="{% url 'crtyearpage' %}" class="btn btn-success btn-md">Add years</a>
+
+            <p class="mt-3">
+                <a href="{% url 'crephotopage' %}" class="btn btn-warning btn-md">Add Photos</a>
+            </p>
+            
+            <div class="row">
+              
+              {% for photo in photos %}
+              <div class="col-md-3">
+                <div class="card my-2">
+                  <img style="height: 300px;object-fit: cover;" src="{{photo.image.url}}">
+                  <div class="card-body">
+                      <small>Year : {{ photo.year.name }}</small>
+                  </div>
+                  <a class="btn btn-outline-dark btn-sm m-1" href="{% url 'viewpage' photo.id %}">View</a>
+              </div>
+              </div>
+
+              {% empty %}
+
+              <h1> No Photos ...</h1>
+              {% endfor %}
+
+            </div>
+           <!-- row end -->
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.  Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin template</a> from BootstrapDash. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made with <i class="ti-heart text-danger ml-1"></i></span>
+          </div>
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Distributed by <a href="https://www.themewagon.com/" target="_blank">Themewagon</a></span> 
+          </div>
+        </footer> 
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>   
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+
+{% endblock content %}
+

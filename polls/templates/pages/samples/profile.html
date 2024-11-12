@@ -1,0 +1,64 @@
+{% extends 'layout/master.html' %}
+{% load static %}
+{% block title %}Profile{% endblock title %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container-scroller">
+
+{% include 'layout/navbar.html' %}
+<div class="container-fluid page-body-wrapper">
+  <!-- notification -->
+{% include 'layout/notification.html' %}
+<!-- sidebar -->
+{% include 'layout/sidebar.html' %}
+
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-lg-4"></div>
+      <div class="col-lg-4">
+        {% if page == 'pro' %}
+        <div class="card" style="width: 30rem;">
+          <img src="{{request.user.profile.url}}" class="card-img-top mt-3" alt="..." style="border-radius: 50%;height: 200px;width: 200px;margin-left: 140px;">
+          <div class="card-body">
+            <h5 class="card-title">Your login Profile</h5>
+            <p class="card-text"><span class="text-success" style="font-size: larger;font-weight: bold;">Username</span> <span class="text-danger" style="font-size: larger;font-weight: bold;margin-left: 50px;">{{user.username}}</span></p>
+            <p class="card-text"><span class="text-success" style="font-size: larger;font-weight: bold;">Email</span> <span class="text-danger" style="font-size: larger;font-weight: bold;margin-left: 50px;">{{user.email}}</span></p>
+             <a href="{% url 'prochangepage' %}" class="btn btn-success btn-md">Profile Change</a> <a href="{% url 'indexpage' %}" class="btn btn-primary btn-md">Back</a>
+          </div>
+        </div>
+        {% else %}
+          <h1 class="mb-5">ChangeProfile <span class="text-success">"{{user.username}}"</span></h1>
+       
+          <!-- change profile -->
+          <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            {{ form.username | as_crispy_field }}
+            {{ form.email | as_crispy_field }}
+            {{ form.profile | as_crispy_field }}
+            
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a href="{% url 'indexpage' %}" class="btn btn-success btn-md">Back</a>       
+          </form>
+           <!-- change profile end -->
+          
+        
+        {% endif %}
+
+        
+      </div>
+      <div class="col-lg-4"></div>
+
+    </div>
+    <!-- row end -->
+    
+  </div>
+
+</div>
+<!-- content-wrappper -->
+</div>
+<!-- container-fluid page-body-wrapper -->
+</div>
+<!-- container-scroller -->
+{% endblock content %}
